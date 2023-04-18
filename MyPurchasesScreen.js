@@ -1,33 +1,36 @@
 import React from 'react';
 import { View, Text, Button, StyleSheet } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
+import { createStackNavigator } from '@react-navigation/native-stack';
+import {NavigationContainer} from '@react-navigation/native';
 
-const MyPurchasesScreen = () => {
-  const navigation = useNavigation();
+import MyPurchasesScreenList from './MyPurchasesScreenList';
+import LoginScreen from './LoginScreen';
 
-  const handleLoginPress = () => {
-    navigation.navigate('LoginScreen');
-  };
+const Stack = createStackNavigator();
+
+const MyPurchasesScreen = ({ route }) => {
+  const { userLoggedIn } = route.params;
 
   return (
-    <View style={styles.container}>
-      <Text style={styles.title}>My Purchases Screen</Text>
-      <Button title="Login" onPress={handleLoginPress} />
-    </View>
+    <NavigationContainer>
+    <Stack.Navigator>
+      {userLoggedIn ? (
+        <Stack.Screen
+          name="MyPurchasesScreenList"
+          component={MyPurchasesScreenList}
+          options={{ title: 'My Purchases' }}
+        />
+      ) : (
+        <Stack.Screen
+          name="LoginScreen"
+          component={LoginScreen}
+          options={{ title: 'Login' }}
+        />
+      )}
+    </Stack.Navigator>
+    </NavigationContainer>
   );
 };
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-  title: {
-    fontSize: 24,
-    fontWeight: 'bold',
-    marginBottom: 16,
-  },
-});
 
 export default MyPurchasesScreen;

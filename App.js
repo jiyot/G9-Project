@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { NavigationContainer } from '@react-navigation/native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
+import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { Ionicons } from '@expo/vector-icons';
 import { StatusBar } from 'expo-status-bar';
 import { StyleSheet, Text, View } from 'react-native';
@@ -11,6 +12,7 @@ import LoginScreen from './LoginScreen';
 import LogoutScreen from './LogoutScreen';
 
 const Tab = createBottomTabNavigator();
+const Stack = createNativeStackNavigator();
 
 export default function App() {
   const [userLoggedIn, setUserLoggedIn] = useState(false);
@@ -40,29 +42,18 @@ export default function App() {
             ),
           }}
         />
-        {!userLoggedIn ? (
-          <Tab.Screen
-            name="MyPurchases"
-            component={MyPurchasesScreen}
-            options={{
-              tabBarLabel: 'My Purchases',
-              tabBarIcon: ({ color, size }) => (
-                <Ionicons name="person-outline" color={color} size={size} />
-              ),
-            }}
-          />
-        ) : (
-          <Tab.Screen
-            name="MyPurchases"
-            component={LoginScreen}
-            options={{
-              tabBarLabel: 'My Purchases',
-              tabBarIcon: ({ color, size }) => (
-                <Ionicons name="log-out-outline" color={color} size={size} />
-              ),
-            }}
-          />
-        )}
+       <Tab.Screen
+        name="MyPurchases"
+        component={MyPurchasesScreen}
+        initialParams={{ userLoggedIn }}
+        options={{
+          tabBarLabel: 'My Purchases',
+          tabBarIcon: ({ color, size }) => (
+            <Ionicons name="person-outline" color={color} size={size} />
+          ),
+        }}
+      />
+
 
       {userLoggedIn ? (
           console.log(`No login user- value false `)
