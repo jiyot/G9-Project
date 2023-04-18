@@ -1,6 +1,7 @@
-import React from 'react';
+import { useEffect, useState } from "react";
 import { View, Text, Button, StyleSheet } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
+
 
 const MyPurchasesScreen = () => {
   const navigation = useNavigation();
