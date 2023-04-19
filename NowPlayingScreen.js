@@ -3,6 +3,7 @@ import { StatusBar } from 'expo-status-bar';
 import { StyleSheet, Text, View, FlatList, Image, Pressable } from 'react-native';
 import { createStackNavigator } from '@react-navigation/stack';
 import { NavigationContainer } from '@react-navigation/native';
+import Icon from 'react-native-vector-icons/MaterialIcons';
 
 const Stack = createStackNavigator();
 
@@ -40,7 +41,7 @@ export default function NowPlayingScreen({navigation, route}) {
     <Pressable onPress={() => navigateToDetails(item)}>
       <View style={styles.listItem}>
         <Text style={styles.title}> {item.title} </Text>
- {/* <Image style={styles.imgAnime} source={{ uri: `https://image.tmdb.org/t/p/w500/${item.poster_path}` }} resizeMode="contain" /> */}
+        <Image style={styles.imgAnime} source={{ uri: `https://image.tmdb.org/t/p/w500/${item.poster_path}` }} resizeMode="contain" />
         <Text style={styles.aboutStyle}>Release Date: {item.release_date} </Text>
         <View style={styles.separator} />
       </View>
