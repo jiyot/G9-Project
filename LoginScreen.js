@@ -1,84 +1,53 @@
-import { useEffect, useState } from "react";
-import { StyleSheet, Text, TextInput, TouchableOpacity, View } from 'react-native';
+import React, { useState } from 'react';
+import { View, Text, TextInput, Button } from 'react-native';
+import { useNavigation } from '@react-navigation/native';
 
-const LoginScreen = ({ navigation }) => {
-  const [username, setUsername] = useState('');
-  const [password, setPassword] = useState('');
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
+import firebase from 'firebase/app';
+import 'firebase/auth';
+import { auth } from "./config/Firebase-config";
+import { signInWithEmailAndPassword } from "firebase/auth";
 
-  const handleLogin = () => {
-    // Here you can put your login logic to authenticate the user
+export default function LoginScreen() {
+  const [email, setEmail] = useState('testfinal@gmail.com');
+  const [password, setPassword] = useState('123456');
+  const navigation = useNavigation();
 
-    // For this example, I'm setting isLoggedIn to true to simulate a successful login
-    setIsLoggedIn(true);
-  };
 
-  const handleLogout = () => {
-    // Here you can put your logout logic to clear the user's session
-
-    // For this example, I'm setting isLoggedIn to false to simulate a successful logout
-    setIsLoggedIn(false);
-  };
-
-  if (isLoggedIn) {
-    // If the user is logged in, redirect to the MyPurchasesScreen
-    // navigation.replace('MyPurchasesScreen');
-    // return null;
-    console.log(`login user true`)
+  const onSignUpClicked = () => {
+    //go to sign up screen
+    navigation.navigate('Signup');
   }
 
+  const handleLogin = () => {
+    signInWithEmailAndPassword( auth, email, password)
+      .then(() => {
+        console.log('User logged in successfully!');
+        navigation.navigate('MyPurchase'); // Navigate to HomeScreen
+      })
+      .catch(error => {
+        console.error('Error logging in:', error);
+      });
+  };
+
   return (
-    <View style={styles.container}>
-      <Text style={styles.title}>Login</Text>
+    <View>
+      <Text>Email</Text>
       <TextInput
-        style={styles.input}
-        placeholder="Username"
-        value={username}
-        onChangeText={setUsername}
+        value={email}
+        onChangeText={setEmail}
+        autoCapitalize="none"
+        keyboardType="email-address"
+        placeholder="Enter your email"
       />
+      <Text>Password</Text>
       <TextInput
-        style={styles.input}
-        placeholder="Password"
         value={password}
         onChangeText={setPassword}
-        secureTextEntry
+        secureTextEntry={true}
+        placeholder="Enter your password"
       />
-      <TouchableOpacity style={styles.button} onPress={handleLogin}>
-        <Text style={styles.buttonText}>Login</Text>
-      </TouchableOpacity>
+      <Button title="Login" onPress={handleLogin} />
+      <Button title="Sigup" onPress={onSignUpClicked} />
     </View>
   );
-};
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-  },
-  title: {
-    fontSize: 24,
-    fontWeight: 'bold',
-    marginBottom: 16,
-  },
-  input: {
-    borderWidth: 1,
-    borderRadius: 4,
-    padding: 8,
-    marginBottom: 16,
-    width: '80%',
-  },
-  button: {
-    backgroundColor: '#007AFF',
-    borderRadius: 4,
-    padding: 8,
-  },
-  buttonText: {
-    color: '#FFF',
-    fontWeight: 'bold',
-    textAlign: 'center',
-  },
-});
-
-export default LoginScreen;
-
+}

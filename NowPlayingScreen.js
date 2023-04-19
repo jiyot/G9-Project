@@ -48,7 +48,7 @@ export default function NowPlayingScreen({navigation, route}) {
   )
 
   const navigateToDetails = (item) => {
-    navigation.navigate('MovieDetailsScreen', { movie: item });
+    navigation.navigate('DetailsScreen', { movie: item });
   }
 
 

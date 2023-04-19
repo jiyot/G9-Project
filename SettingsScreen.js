@@ -1,10 +1,9 @@
+
 import React, { useState, useEffect } from 'react';
 import { View, Text, Button } from 'react-native';
 import { auth } from './config/Firebase-config';
-import { useNavigation } from '@react-navigation/native';
 
-
-const MyPurchasesScreen = ({ navigation }) => {
+export default function SettingsScreen({ navigation }) {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
 
   useEffect(() => {
@@ -34,7 +33,7 @@ const MyPurchasesScreen = ({ navigation }) => {
       {isLoggedIn ? (
         <View>
           <Text>You are logged in!</Text>
-          <Text>List retrive from Firestore</Text>
+          <Button title="Logout" onPress={handleLogout} />
         </View>
       ) : (
         <View>
@@ -45,19 +44,4 @@ const MyPurchasesScreen = ({ navigation }) => {
       )}
     </View>
   );
-};
-
-// const styles = StyleSheet.create({
-//   container: {
-//     flex: 1,
-//     alignItems: 'center',
-//     justifyContent: 'center',
-//   },
-//   title: {
-//     fontSize: 24,
-//     fontWeight: 'bold',
-//     marginBottom: 16,
-//   },
-// });
-
-export default MyPurchasesScreen;
+}
