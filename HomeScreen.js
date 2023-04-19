@@ -42,7 +42,7 @@ export default function App() {
             ),
           }}
         />
-        {userLoggedIn ? (
+        {!userLoggedIn ? (
           <Tab.Screen
             name="MyPurchases"
             component={MyPurchasesScreen}

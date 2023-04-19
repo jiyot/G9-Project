@@ -12,6 +12,7 @@ import LoginScreen from './LoginScreen';
 import LogoutScreen from './LogoutScreen';
 import MovieDetailsScreen from './MovieDetailsScreen';
 import HomeScreen from './HomeScreen';
+import BuyTicketsScreen from "./BuyTicketsScreen";
 
 const Tab = createBottomTabNavigator();
 
@@ -28,6 +29,7 @@ export default function App() {
         <Stack.Screen name="MyPurchasesScreen" component={MyPurchasesScreen} />
         <Stack.Screen name="MovieDetailsScreen" component={MovieDetailsScreen} />
         <Stack.Screen name="Login" component={LoginScreen} />
+        <Stack.Screen name="BuyTicketsScreen" component={BuyTicketsScreen} />
         <Stack.Screen name="LogOut" 
         component={LogoutScreen} 
         options={ ({route}) => ({headerRight: () => (
