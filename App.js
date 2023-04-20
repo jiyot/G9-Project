@@ -25,6 +25,7 @@ function HomeStack() {
     <Stack.Navigator>
       <Stack.Screen name="Home" component={NowPlayingScreen} />
       <Stack.Screen name="DetailsScreen" component={MovieDetailsScreen} />
+      <Stack.Screen name="Login" component={LoginScreen} />
       {/* Add Nowplaying screens to the Home stack */}
     </Stack.Navigator>
   );

@@ -22,7 +22,7 @@ export default function LoginScreen() {
     signInWithEmailAndPassword( auth, email, password)
       .then(() => {
         console.log('User logged in successfully!');
-        navigation.navigate('MyPurchase'); // Navigate to HomeScreen
+        navigation.navigate('Home'); // Navigate to HomeScreen
       })
       .catch(error => {
         console.error('Error logging in:', error);
